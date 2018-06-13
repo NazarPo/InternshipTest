@@ -10,12 +10,12 @@ public class Student {
     public Student(String name, int level) {
         //TODO: Implementation is needed
         studentName = name;
-        setKnowledge(new Knowledge(level));
+        setKnowledge(level);
     }
 
-    public void setKnowledge(Knowledge knowledge) {
+    public void setKnowledge(int level) {
         //TODO: Implementation is needed
-        levelOfKnowledge = knowledge;
+        levelOfKnowledge = new Knowledge(level);
     }
 
     public Knowledge getLevelOfKnowledge() {

@@ -12,6 +12,10 @@ public class Application {
         university.addStudent(new Student("Maria Perechrest", 2));
 
         Internship internship = new Internship("Interlink");
+        for(Student st: university.getListOfStudents()){
+            internship.setStudent(st);
+        }
+
         System.out.println("List of internship's students:");
         System.out.println(internship.getStudents());
     }

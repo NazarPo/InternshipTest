@@ -12,10 +12,10 @@ public class Knowledge {
         return Level;
     }
 
-    public void setLevel(int level){
+    private void setLevel(int level){
         if(level < 0)
             Level = 0;
-        else if(Level > 5)
+        else if(level > 5)
             Level = 5;
         else
             Level = level;
