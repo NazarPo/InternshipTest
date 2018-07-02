@@ -1,4 +1,4 @@
-package institution;
+package institution.university;
 
 import java.util.ArrayList;
 import person.Student;
