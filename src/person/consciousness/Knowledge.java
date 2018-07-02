@@ -1,22 +1,20 @@
 package person.consciousness;
 
 public class Knowledge {
-    private int Level;
+    private double Level;
 
-    public Knowledge(int level) {
+    public Knowledge(double level) {
         //TODO: Implementation is needed
         setLevel(level);
     }
 
-    public int getLevel(){
+    public double getLevel(){
         return Level;
     }
 
-    private void setLevel(int level){
+    private void setLevel(double level){
         if(level < 0)
             Level = 0;
-        else if(level > 5)
-            Level = 5;
         else
             Level = level;
     }

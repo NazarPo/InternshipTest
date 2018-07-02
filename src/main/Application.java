@@ -1,6 +1,6 @@
 package main;
 
-import institution.University;
+import institution.university.University;
 import institution.interlink.Internship;
 import person.Student;
 
