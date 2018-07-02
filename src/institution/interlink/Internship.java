@@ -2,21 +2,40 @@ package institution.interlink;
 
 import java.util.ArrayList;
 
-import institution.KnowledgeSource;
 import person.Student;
+import institution.KnowledgeSource;
 import person.consciousness.Knowledge;
 
-public class Internship extends KnowledgeSource {
+public class Internship implements KnowledgeSource {
     private String intershipName;
     private ArrayList<Student> listOfIntershipsStudent;
+    private Knowledge theoreticalKnowledge;
+    private Knowledge practicalKnowledge;
 
-    public Internship(String name) {
+    public Internship(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge) {
         //TODO: Implementation is needed
         listOfIntershipsStudent = new ArrayList<Student>();
         intershipName = name;
-        setLevelOfTeoreticalKnowledge(50);
-        setLevelOfPracticalKnowledge(50);
+        this.setTheoreticalKnowledge(new Knowledge(levelOfTheoreticalKnowledge));
+        this.setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
     }
+
+    public Knowledge getTheoreticalKnowledge(){
+        return theoreticalKnowledge;
+    }
+
+    public void setTheoreticalKnowledge(Knowledge knowledge){
+        this.theoreticalKnowledge = knowledge;
+    }
+
+    public Knowledge getPracticalKnowledge(){
+        return practicalKnowledge;
+    }
+
+    public void setPracticalKnowledge(Knowledge knowledge){
+        this.practicalKnowledge = knowledge;
+    }
+
 
     public void setStudent(Student student) {
         //TODO: Implementation is needed
@@ -38,21 +57,10 @@ public class Internship extends KnowledgeSource {
     }
 
     @Override
-    public void giveTeoreticalKnowledge(Student student){
+    public void teach(Student student){
        if(listOfIntershipsStudent.indexOf(student) != -1){
-           student.setTheoreticalKnowledge(student.getTheoreticalKnowledge().getLevel() +
-                   this.getLevelOfTeoreticalKnowledge().getLevel() * student.getLearningFactor()
-           );
+            student.study(this.getTheoreticalKnowledge().getLevel(), getPracticalKnowledge().getLevel());
        }
-    }
-
-    @Override
-    public void givePracticalKnowledge(Student student){
-        if(listOfIntershipsStudent.indexOf(student) != -1){
-            student.setPracticalKnowledge(student.getPracticalKnowledge().getLevel() +
-                    this.getLevelOfPracticalKnowledge().getLevel() * student.getLearningFactor()
-            );
-        }
     }
 
 }

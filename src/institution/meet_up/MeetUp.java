@@ -1,20 +1,40 @@
 package institution.meet_up;
 
-import institution.KnowledgeSource;
 import person.Student;
+import person.consciousness.Knowledge;
 
 import java.util.ArrayList;
+import institution.KnowledgeSource;
 
-public class MeetUp extends KnowledgeSource {
+public class MeetUp implements KnowledgeSource {
     private String themeOfMeetUp;
     private ArrayList<Student> listOfParticipants;
+    private Knowledge theoreticalKnowledge;
+    private Knowledge practicalKnowledge;
 
-    public MeetUp(String name){
+    public MeetUp(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge){
         themeOfMeetUp = name;
         listOfParticipants = new ArrayList<Student>();
-        setLevelOfTeoreticalKnowledge(50);
-        setLevelOfPracticalKnowledge(50);
+        this.setTheoreticalKnowledge(new Knowledge(levelOfTheoreticalKnowledge));
+        this.setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
     }
+
+    public Knowledge getTheoreticalKnowledge(){
+        return theoreticalKnowledge;
+    }
+
+    public void setTheoreticalKnowledge(Knowledge knowledge){
+        this.theoreticalKnowledge = knowledge;
+    }
+
+    public Knowledge getPracticalKnowledge(){
+        return practicalKnowledge;
+    }
+
+    public void setPracticalKnowledge(Knowledge knowledge){
+        this.practicalKnowledge = knowledge;
+    }
+
 
     public void addStudent(Student student) {
         //TODO: Implementation is needed
@@ -31,21 +51,13 @@ public class MeetUp extends KnowledgeSource {
     }
 
     @Override
-    public void giveTeoreticalKnowledge(Student student){
-        if(listOfParticipants.indexOf(student) != -1){
-            student.setTheoreticalKnowledge(student.getTheoreticalKnowledge().getLevel() +
-                    this.getLevelOfTeoreticalKnowledge().getLevel() * student.getLearningFactor()
-            );
+    public void teach(Student student){
+        if(listOfParticipants.indexOf(student) != -1) {
+            if(student.HasLaptop()){
+                student.study(this.getTheoreticalKnowledge().getLevel(), this.getPracticalKnowledge().getLevel());
+            } else {
+                student.study(this.getTheoreticalKnowledge().getLevel(), 0);
+            }
         }
     }
-
-    @Override
-    public void givePracticalKnowledge(Student student){
-        if(listOfParticipants.indexOf(student) != -1 && student.isHasLaptop() == true){
-            student.setPracticalKnowledge(student.getPracticalKnowledge().getLevel() +
-                    this.getLevelOfPracticalKnowledge().getLevel() * student.getLearningFactor()
-            );
-        }
-    }
-
 }

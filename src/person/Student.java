@@ -1,9 +1,10 @@
 package person;
 
+import institution.KnowledgeSource;
 import person.consciousness.Knowledge;
 
-public class Student {
-
+public class Student implements KnowledgeSource
+{
     private String studentName;
     private double learningFactor;
     private Knowledge theoreticalKnowledge;
@@ -13,33 +14,32 @@ public class Student {
     public Student(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge, double factor, boolean hasLaptop) {
         //TODO: Implementation is needed
         this.studentName = name;
-        setTheoreticalKnowledge(levelOfTheoreticalKnowledge);
-        setPracticalKnowledge(levelOfPracticalKnowledge);
-        setLearningFactor(factor);
         this.hasLaptop = hasLaptop;
+        setLearningFactor(factor);
+        setTheoreticalKnowledge(new Knowledge(levelOfTheoreticalKnowledge));
+        setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
     }
 
-    public boolean isHasLaptop() {
+    public boolean HasLaptop() {
          return this.hasLaptop;
     }
 
-    public void setTheoreticalKnowledge(double level) {
-        //TODO: Implementation is needed
-        theoreticalKnowledge = new Knowledge(level);
-    }
-
-    public Knowledge getTheoreticalKnowledge() {
+    public Knowledge getTheoreticalKnowledge(){
         return theoreticalKnowledge;
     }
 
-    public void setPracticalKnowledge(double level) {
-        //TODO: Implementation is needed
-        practicalKnowledge = new Knowledge(level);
+    public void setTheoreticalKnowledge(Knowledge knowledge){
+        this.theoreticalKnowledge = knowledge;
     }
 
-    public Knowledge getPracticalKnowledge() {
+    public Knowledge getPracticalKnowledge(){
         return practicalKnowledge;
     }
+
+    public void setPracticalKnowledge(Knowledge knowledge){
+        this.practicalKnowledge = knowledge;
+    }
+
 
     @Override
     public String toString(){
@@ -60,4 +60,13 @@ public class Student {
             learningFactor = factor;
     }
 
+    public void study(double teorKnow, double practKnow){
+        this.setTheoreticalKnowledge(new Knowledge(this.getTheoreticalKnowledge().getLevel() + teorKnow * this.getLearningFactor()));
+        this.setPracticalKnowledge(new Knowledge(this.getPracticalKnowledge().getLevel() + practKnow * this.getLearningFactor()));
+    }
+
+    @Override
+    public void teach(Student student){
+        student.study(this.theoreticalKnowledge.getLevel(), this.practicalKnowledge.getLevel());
+    }
 }

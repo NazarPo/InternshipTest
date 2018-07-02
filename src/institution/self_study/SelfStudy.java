@@ -1,28 +1,36 @@
 package institution.self_study;
 
-import institution.KnowledgeSource;
 import person.Student;
+import person.consciousness.Knowledge;
+import institution.KnowledgeSource;
 
-public class SelfStudy extends KnowledgeSource {
+public class SelfStudy implements KnowledgeSource {
+    private Knowledge theoreticalKnowledge;
+    private Knowledge practicalKnowledge;
 
-    public SelfStudy(){
-        setLevelOfTeoreticalKnowledge(70);
-        setLevelOfPracticalKnowledge(70);
+    public Knowledge getTheoreticalKnowledge(){
+        return theoreticalKnowledge;
+    }
+
+    public void setTheoreticalKnowledge(Knowledge knowledge){
+        this.theoreticalKnowledge = knowledge;
+    }
+
+    public Knowledge getPracticalKnowledge(){
+        return practicalKnowledge;
+    }
+
+    public void setPracticalKnowledge(Knowledge knowledge){
+        this.practicalKnowledge = knowledge;
+    }
+
+    public SelfStudy(double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge){
+        setTheoreticalKnowledge(new Knowledge(levelOfTheoreticalKnowledge));
+        setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
     }
 
     @Override
-    public void giveTeoreticalKnowledge(Student student){
-        student.setTheoreticalKnowledge(student.getTheoreticalKnowledge().getLevel() +
-                this.getLevelOfTeoreticalKnowledge().getLevel() * student.getLearningFactor()
-        );
-
+    public void teach(Student student){
+        student.study(this.getTheoreticalKnowledge().getLevel(), getPracticalKnowledge().getLevel());
     }
-
-    @Override
-    public void givePracticalKnowledge(Student student){
-        student.setPracticalKnowledge(student.getPracticalKnowledge().getLevel() +
-                this.getLevelOfPracticalKnowledge().getLevel() * student.getLearningFactor()
-        );
-    }
-
 }

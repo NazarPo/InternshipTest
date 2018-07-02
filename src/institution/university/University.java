@@ -1,23 +1,38 @@
 package institution.university;
 
 import java.util.ArrayList;
-
 import institution.KnowledgeSource;
 import person.Student;
 import person.consciousness.Knowledge;
-import repositories.StudentsFromDB;
 import repositories.StudentsFromFile;
 
-public class University extends KnowledgeSource {
+public class University implements KnowledgeSource {
     private String universityName;
     private ArrayList<Student> listOfStudents;
+    private Knowledge theoreticalKnowledge;
+    private Knowledge practicalKnowledge;
 
-    public University(String name) {
+    public Knowledge getTheoreticalKnowledge() {
+        return theoreticalKnowledge;
+    }
+
+    public void setTheoreticalKnowledge(Knowledge knowledge) {
+        this.theoreticalKnowledge = knowledge;
+    }
+
+    public Knowledge getPracticalKnowledge() {
+        return practicalKnowledge;
+    }
+
+    public void setPracticalKnowledge(Knowledge knowledge) {
+        this.practicalKnowledge = knowledge;
+    }
+
+    public University(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge) {
         //TODO: Implementation is needed
         listOfStudents = new ArrayList<Student>();
         universityName = name;
-        setLevelOfTeoreticalKnowledge(30);
-        setLevelOfPracticalKnowledge(10);
+
     }
 
     public void setStudent(Student student) {
@@ -34,35 +49,15 @@ public class University extends KnowledgeSource {
         return listOfStudents;
     }
 
-    public String getUniversityName(){
+    public String getUniversityName() {
         return universityName;
     }
 
-    public void readStudents(){
-        new StudentsFromFile().readStudents();
-        // or new StudentsFromDB().readStudents();
-    }
-
-    public void writeStudents(){
-        new StudentsFromFile().writeStudents();
-        // or new StudentsFromDB().writeStudents();
-    }
-
     @Override
-    public void giveTeoreticalKnowledge(Student student){
+    public void teach(Student student){
         if(listOfStudents.indexOf(student) != -1){
-            student.setTheoreticalKnowledge(student.getTheoreticalKnowledge().getLevel() +
-                    this.getLevelOfTeoreticalKnowledge().getLevel() * student.getLearningFactor()
-            );
-        }
-    }
-
-    @Override
-    public void givePracticalKnowledge(Student student){
-        if(listOfStudents.indexOf(student) != -1){
-            student.setPracticalKnowledge(student.getPracticalKnowledge().getLevel() +
-                    this.getLevelOfPracticalKnowledge().getLevel() * student.getLearningFactor()
-            );
+            student.study(this.getTheoreticalKnowledge().getLevel(), getPracticalKnowledge().getLevel());
         }
     }
 }
+
