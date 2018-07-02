@@ -26,7 +26,6 @@ public class Internship extends KnowledgeSource {
 
     public String getStudents() {
         //TODO: Implementation is needed
-        //return "Andrew Maslenko\nJulia Veselkina\n";
         String students = "";
         for(Student st: listOfIntershipsStudent){
             students += st + "\n";
@@ -55,6 +54,5 @@ public class Internship extends KnowledgeSource {
             );
         }
     }
-
 
 }

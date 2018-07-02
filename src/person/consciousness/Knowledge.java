@@ -15,8 +15,6 @@ public class Knowledge {
     private void setLevel(double level){
         if(level < 0)
             Level = 0;
-        else if(level > 100)
-            Level = 100;
         else
             Level = level;
     }

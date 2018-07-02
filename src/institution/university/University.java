@@ -1,11 +1,14 @@
 package institution.university;
 
 import java.util.ArrayList;
+
+import institution.KnowledgeSource;
 import person.Student;
+import person.consciousness.Knowledge;
 import repositories.StudentsFromDB;
 import repositories.StudentsFromFile;
 
-public class University {
+public class University extends KnowledgeSource {
     private String universityName;
     private ArrayList<Student> listOfStudents;
 
@@ -13,6 +16,8 @@ public class University {
         //TODO: Implementation is needed
         listOfStudents = new ArrayList<Student>();
         universityName = name;
+        setLevelOfTeoreticalKnowledge(30);
+        setLevelOfPracticalKnowledge(10);
     }
 
     public void setStudent(Student student) {
@@ -41,5 +46,23 @@ public class University {
     public void writeStudents(){
         new StudentsFromFile().writeStudents();
         // or new StudentsFromDB().writeStudents();
+    }
+
+    @Override
+    public void giveTeoreticalKnowledge(Student student){
+        if(listOfStudents.indexOf(student) != -1){
+            student.setTheoreticalKnowledge(student.getTheoreticalKnowledge().getLevel() +
+                    this.getLevelOfTeoreticalKnowledge().getLevel() * student.getLearningFactor()
+            );
+        }
+    }
+
+    @Override
+    public void givePracticalKnowledge(Student student){
+        if(listOfStudents.indexOf(student) != -1){
+            student.setPracticalKnowledge(student.getPracticalKnowledge().getLevel() +
+                    this.getLevelOfPracticalKnowledge().getLevel() * student.getLearningFactor()
+            );
+        }
     }
 }

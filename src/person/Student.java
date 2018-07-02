@@ -8,13 +8,19 @@ public class Student {
     private double learningFactor;
     private Knowledge theoreticalKnowledge;
     private Knowledge practicalKnowledge;
+    private boolean hasLaptop;
 
-    public Student(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge, double factor) {
+    public Student(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge, double factor, boolean hasLaptop) {
         //TODO: Implementation is needed
-        studentName = name;
+        this.studentName = name;
         setTheoreticalKnowledge(levelOfTheoreticalKnowledge);
         setPracticalKnowledge(levelOfPracticalKnowledge);
         setLearningFactor(factor);
+        this.hasLaptop = hasLaptop;
+    }
+
+    public boolean isHasLaptop() {
+         return this.hasLaptop;
     }
 
     public void setTheoreticalKnowledge(double level) {
