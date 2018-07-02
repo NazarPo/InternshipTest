@@ -44,7 +44,7 @@ public class Student implements KnowledgeSource
     @Override
     public String toString(){
         return this.studentName + ", level of theoretical knowledge: " + this.getTheoreticalKnowledge().getLevel() +
-                ", level of practical knowledge:" + this.getPracticalKnowledge().getLevel() + ".";
+                ", level of practical knowledge: " + this.getPracticalKnowledge().getLevel() + ".";
     }
 
     public double getLearningFactor(){
