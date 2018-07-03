@@ -29,6 +29,10 @@ public class SelfStudy implements KnowledgeSource {
         setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
     }
 
+    public String getName(){
+        return "Self-study";
+    }
+
     @Override
     public void teach(Student student){
         student.study(this.getTheoreticalKnowledge().getLevel(), getPracticalKnowledge().getLevel());

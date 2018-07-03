@@ -1,31 +1,125 @@
 package main;
 
-import institution.meet_up.MeetUp;
+import institution.interlink.MeetUp;
+import institution.self_study.SelfStudy;
 import institution.university.University;
 import institution.interlink.Internship;
 import person.Student;
+import person.consciousness.dates.Schedule;
+import person.consciousness.development.DevelopmentEvent;
+import person.consciousness.development.DevelopmentPlan;
+import person.consciousness.dates.EventCondition;
+
+import java.time.LocalDate;
 
 public class Application {
     public static void main(String[] args) {
-        University university = new University("CH.U.I.", 30, 10);
-        university.addStudent(new Student("Andrew Kostenko", 50, 50, 0.9, true));
-        university.addStudent(new Student("Julia Veselkina", 45, 30, 0.6, false));
-        university.addStudent(new Student("Maria Perechrest", 29, 26, 0.2, true));
+        Student student1 = new Student(
+                "Andrew Kostenko",
+                50,
+                50,
+                0.9,
+                true
+        );
 
-        Internship internship = new Internship("Interlink", 100, 100);
+        Student student2 =  new Student(
+                "Julia Veselkina",
+                45,
+                30,
+                0.6,
+                false
+        );
+
+        Student student3 = new Student(
+                "Maria Perechrest",
+                29,
+                26,
+                0.2,
+                true
+        );
+
+        Student student4 = new Student(
+                "Oleg Someone",
+                42,
+                45,
+                0.7,
+                false
+        );
+
+        Student student5 = new Student(
+                "Julia Nobody",
+                20,
+                24,
+                0.4,
+                true
+        );
+
+        Student student6 = new Student(
+                "Gregory Anybody",
+                21,
+                15,
+                0.2,
+                false
+        );
+
+        University university = new University("CH.U.I.", 30, 10);
+        university.addStudent(student1);
+        university.addStudent(student2);
+        university.addStudent(student3);
+        university.addStudent(student4);
+        university.addStudent(student5);
+        university.addStudent(student6);
+
+        Internship internship = new Internship(
+                "Interlink",
+                100,
+                100
+        );
+
         for(Student st: university.getListOfStudents()){
-            internship.setStudent(st);
+            internship.addStudent(st);
         }
 
         MeetUp meetUp = new MeetUp("OOP Basics", 70, 70);
-        meetUp.addStudent(new Student("Andrew Kostenko", 50, 50, 0.9, true));
-        meetUp.addStudent(new Student("Andrew Kostenko", 50, 44, 0.7, true));
-        meetUp.addStudent(new Student("Andrew Kostenko", 35, 30, 0.5, false));
-        meetUp.addStudent(new Student("Andrew Kostenko", 24, 30, 0.5, false));
-        meetUp.addStudent(new Student("Andrew Kostenko", 70, 50, 0.4, false));
-        meetUp.addStudent(new Student("Andrew Kostenko", 44, 40, 0.3, true));
+        meetUp.addStudent(student1);
+        meetUp.addStudent(student2);
+        meetUp.addStudent(student3);
+        meetUp.addStudent(student4);
+        meetUp.addStudent(student5);
+        meetUp.addStudent(student6);
 
-        System.out.println("List of internship's students:");
-        System.out.println(internship.getStudents());
+        SelfStudy selfStudy = new SelfStudy(65, 50);
+
+        DevelopmentPlan plan = new DevelopmentPlan("First plan");
+        plan.addStudent(student1);
+        plan.addStudent(student2);
+        plan.addStudent(student3);
+        plan.addStudent(student5);
+
+        LocalDate universityStartDay = LocalDate.of(2016, 1, 1);
+        LocalDate universityEndDay = LocalDate.of(2021, 6, 20);
+
+        LocalDate internshipStartDay = LocalDate.of(2018, 7, 2);
+        LocalDate internsipEndDay = LocalDate.of(2018, 10, 2);
+
+        LocalDate meetupStartDay = LocalDate.of(2018, 5, 14);
+        LocalDate meetupEndDay = LocalDate.of(2018, 5, 14);
+
+        LocalDate selfstudyStartDay = LocalDate.of(2010, 1, 1);
+        LocalDate seldstudyEndDay = LocalDate.of(2021, 6, 20);
+
+
+        plan.addDevelopmentEvent(new DevelopmentEvent(university, new Schedule(universityStartDay, universityEndDay, EventCondition.ON_WEEKDAYS) ));
+        plan.addDevelopmentEvent(new DevelopmentEvent(internship,new Schedule(internshipStartDay, internsipEndDay, EventCondition.ON_WEEKDAYS) ));
+        plan.addDevelopmentEvent(new DevelopmentEvent(meetUp, new Schedule(meetupStartDay, meetupEndDay, EventCondition.MONTHLY) ));
+        plan.addDevelopmentEvent(new DevelopmentEvent(selfStudy, new Schedule(selfstudyStartDay, seldstudyEndDay, EventCondition.ONCE) ));
+
+        LocalDate date1 = LocalDate.of(2018, 5, 14);
+        LocalDate date2 = LocalDate.of(2018, 7, 1);
+        LocalDate date3 = LocalDate.now();
+
+        System.out.println(plan.getName() + ":");
+        plan.implementPlan(date1);
+
     }
 }

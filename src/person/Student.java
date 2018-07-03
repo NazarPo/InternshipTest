@@ -11,13 +11,21 @@ public class Student implements KnowledgeSource
     private Knowledge practicalKnowledge;
     private boolean hasLaptop;
 
-    public Student(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge, double factor, boolean hasLaptop) {
-        //TODO: Implementation is needed
+    public Student(String name,
+                   double levelOfTheoreticalKnowledge,
+                   double levelOfPracticalKnowledge,
+                   double factor,
+                   boolean hasLaptop
+    ) {
         this.studentName = name;
         this.hasLaptop = hasLaptop;
         setLearningFactor(factor);
         setTheoreticalKnowledge(new Knowledge(levelOfTheoreticalKnowledge));
         setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
+    }
+
+    public String getName(){
+        return studentName;
     }
 
     public boolean HasLaptop() {
@@ -44,7 +52,7 @@ public class Student implements KnowledgeSource
     @Override
     public String toString(){
         return this.studentName + ", level of theoretical knowledge: " + this.getTheoreticalKnowledge().getLevel() +
-                ", level of practical knowledge:" + this.getPracticalKnowledge().getLevel() + ".";
+                ", level of practical knowledge: " + this.getPracticalKnowledge().getLevel() + ".";
     }
 
     public double getLearningFactor(){
@@ -60,9 +68,21 @@ public class Student implements KnowledgeSource
             learningFactor = factor;
     }
 
-    public void study(double teorKnow, double practKnow){
-        this.setTheoreticalKnowledge(new Knowledge(this.getTheoreticalKnowledge().getLevel() + teorKnow * this.getLearningFactor()));
-        this.setPracticalKnowledge(new Knowledge(this.getPracticalKnowledge().getLevel() + practKnow * this.getLearningFactor()));
+    public void addTheoreticalKnowledge(double knowledge){
+        double currentKnowledge = this.getTheoreticalKnowledge().getLevel();
+        this.theoreticalKnowledge.setLevel(currentKnowledge + knowledge * this.getLearningFactor());
+        System.out.println(this.studentName + " : " + "theoretical knowledge " + currentKnowledge + " ---> " + this.theoreticalKnowledge.getLevel());
+    }
+
+    public void addPracticalKnowledge(double knowledge){
+        double currentKnowledge = this.getPracticalKnowledge().getLevel();
+        this.practicalKnowledge.setLevel(currentKnowledge + knowledge * this.getLearningFactor());
+        System.out.println(this.studentName + " : " + "practical knowledge " + currentKnowledge + " ---> " + this.practicalKnowledge.getLevel());
+    }
+
+    public void study(double teorKnowledge, double practKnowledge) {
+        this.addTheoreticalKnowledge(teorKnowledge);
+        this.addPracticalKnowledge(practKnowledge);
     }
 
     @Override

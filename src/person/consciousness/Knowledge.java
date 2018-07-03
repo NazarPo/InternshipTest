@@ -12,7 +12,7 @@ public class Knowledge {
         return Level;
     }
 
-    private void setLevel(double level){
+    public void setLevel(double level){
         if(level < 0)
             Level = 0;
         else
