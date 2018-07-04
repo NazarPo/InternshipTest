@@ -14,9 +14,9 @@ public class MeetUp extends Institution {
     public void teach(Student student){
         if(this.getListOfStudents().contains(student)) {
             if(student.HasLaptop()){
-                student.study(this.getTheoreticalKnowledge().getLevel(), this.getPracticalKnowledge().getLevel());
+                student.study(this.getTheoreticalKnowledge(), this.getPracticalKnowledge());
             } else {
-                student.study(this.getTheoreticalKnowledge().getLevel(), 0);
+                student.study(this.getTheoreticalKnowledge(), 0);
             }
         }
     }

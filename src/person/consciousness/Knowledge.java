@@ -4,7 +4,6 @@ public class Knowledge {
     private double Level;
 
     public Knowledge(double level) {
-        //TODO: Implementation is needed
         setLevel(level);
     }
 

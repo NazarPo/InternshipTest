@@ -9,7 +9,7 @@ public class Internship extends Institution {
     }
 
     public void addStudent(Student student) {
-        if(student.getTheoreticalKnowledge().getLevel() >= 40 && student.getPracticalKnowledge().getLevel() >= 30)
+        if(student.getTheoreticalKnowledge() >= 40 && student.getPracticalKnowledge() >= 30)
             this.getListOfStudents().add(student);
     }
 }

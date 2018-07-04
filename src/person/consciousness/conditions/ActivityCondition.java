@@ -1,9 +1,9 @@
-package person.consciousness.dates;
+package person.consciousness.conditions;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public enum EventCondition {
+public enum ActivityCondition {
     ON_WEEKDAYS, ONCE, MONTHLY, WEEKLY;
 
     public boolean conditionDate(LocalDate date) {

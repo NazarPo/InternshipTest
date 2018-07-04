@@ -2,14 +2,14 @@ package person.consciousness.development;
 
 import institution.KnowledgeSource;
 import person.Student;
-import person.consciousness.dates.Schedule;
+import person.consciousness.schedule.Schedule;
 import java.time.LocalDate;
 
-public class DevelopmentEvent {
+public class DevelopmentActivity {
     private Schedule schedule;
     private KnowledgeSource source;
 
-    public DevelopmentEvent(KnowledgeSource source, Schedule schedule) {
+    public DevelopmentActivity(KnowledgeSource source, Schedule schedule) {
         this.source = source;
         this.schedule = schedule;
     }
@@ -20,19 +20,8 @@ public class DevelopmentEvent {
         }
     }
 
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
-
     public KnowledgeSource getSource() {
         return source;
     }
 
-    public void setSource(KnowledgeSource source) {
-        this.source = source;
-    }
 }

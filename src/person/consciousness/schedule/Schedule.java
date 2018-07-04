@@ -1,6 +1,7 @@
-package person.consciousness.dates;
+package person.consciousness.schedule;
 
 import person.Student;
+import person.consciousness.conditions.ActivityCondition;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -9,10 +10,10 @@ import java.util.Map;
 public class Schedule {
     private LocalDate startDate;
     private LocalDate endDate;
-    private EventCondition condition;
+    private ActivityCondition condition;
     private Map<Student, LocalDate> visitedEvents;
 
-    public Schedule(LocalDate startDate, LocalDate endDate, EventCondition condition){
+    public Schedule(LocalDate startDate, LocalDate endDate, ActivityCondition condition){
         this.startDate = startDate;
         this.endDate = endDate;
         this.condition = condition;
@@ -23,7 +24,7 @@ public class Schedule {
         if (date.isBefore(startDate) || date.isAfter(endDate))
             return false;
         else {
-            if (condition.equals(EventCondition.MONTHLY)) {
+            if (condition.equals(ActivityCondition.MONTHLY)) {
                 if (isNewMonth(visitedEvents.get(student), date) && condition.conditionDate(date)) {
                     visitedEvents.put(student, date);
                     return true;
@@ -32,7 +33,7 @@ public class Schedule {
                 }
             }
 
-            if (condition.equals(EventCondition.WEEKLY)) {
+            if (condition.equals(ActivityCondition.WEEKLY)) {
                 if (isNewWeek(visitedEvents.get(student), date) && condition.conditionDate(date)) {
                     visitedEvents.put(student, date);
                     return true;

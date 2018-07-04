@@ -8,16 +8,16 @@ public class SelfStudy implements KnowledgeSource {
     private Knowledge theoreticalKnowledge;
     private Knowledge practicalKnowledge;
 
-    public Knowledge getTheoreticalKnowledge(){
-        return theoreticalKnowledge;
+    public double getTheoreticalKnowledge(){
+        return theoreticalKnowledge.getLevel();
     }
 
     public void setTheoreticalKnowledge(Knowledge knowledge){
         this.theoreticalKnowledge = knowledge;
     }
 
-    public Knowledge getPracticalKnowledge(){
-        return practicalKnowledge;
+    public double getPracticalKnowledge(){
+        return practicalKnowledge.getLevel();
     }
 
     public void setPracticalKnowledge(Knowledge knowledge){
@@ -35,6 +35,6 @@ public class SelfStudy implements KnowledgeSource {
 
     @Override
     public void teach(Student student){
-        student.study(this.getTheoreticalKnowledge().getLevel(), getPracticalKnowledge().getLevel());
+        student.study(this.getTheoreticalKnowledge(), getPracticalKnowledge());
     }
 }

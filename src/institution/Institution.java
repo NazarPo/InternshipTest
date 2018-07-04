@@ -17,16 +17,16 @@ public class Institution implements KnowledgeSource {
         setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
     }
 
-    public Knowledge getTheoreticalKnowledge(){
-        return theoreticalKnowledge;
+    public double getTheoreticalKnowledge(){
+        return theoreticalKnowledge.getLevel();
     }
 
     public void setTheoreticalKnowledge(Knowledge knowledge){
         this.theoreticalKnowledge = knowledge;
     }
 
-    public Knowledge getPracticalKnowledge(){
-        return practicalKnowledge;
+    public double getPracticalKnowledge(){
+        return practicalKnowledge.getLevel();
     }
 
     public void setPracticalKnowledge(Knowledge knowledge){
@@ -57,7 +57,7 @@ public class Institution implements KnowledgeSource {
     @Override
     public void teach(Student student){
         if(listOfStudents.contains(student)){
-            student.study(this.getTheoreticalKnowledge().getLevel(), this.getPracticalKnowledge().getLevel());
+            student.study(this.getTheoreticalKnowledge(), this.getPracticalKnowledge());
         }
     }
 }

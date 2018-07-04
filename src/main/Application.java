@@ -5,10 +5,10 @@ import institution.self_study.SelfStudy;
 import institution.university.University;
 import institution.interlink.Internship;
 import person.Student;
-import person.consciousness.dates.Schedule;
-import person.consciousness.development.DevelopmentEvent;
+import person.consciousness.schedule.Schedule;
+import person.consciousness.development.DevelopmentActivity;
 import person.consciousness.development.DevelopmentPlan;
-import person.consciousness.dates.EventCondition;
+import person.consciousness.conditions.ActivityCondition;
 
 import java.time.LocalDate;
 
@@ -109,17 +109,17 @@ public class Application {
         LocalDate seldstudyEndDay = LocalDate.of(2021, 6, 20);
 
 
-        plan.addDevelopmentEvent(new DevelopmentEvent(university, new Schedule(universityStartDay, universityEndDay, EventCondition.ON_WEEKDAYS) ));
-        plan.addDevelopmentEvent(new DevelopmentEvent(internship,new Schedule(internshipStartDay, internsipEndDay, EventCondition.ON_WEEKDAYS) ));
-        plan.addDevelopmentEvent(new DevelopmentEvent(meetUp, new Schedule(meetupStartDay, meetupEndDay, EventCondition.MONTHLY) ));
-        plan.addDevelopmentEvent(new DevelopmentEvent(selfStudy, new Schedule(selfstudyStartDay, seldstudyEndDay, EventCondition.ONCE) ));
+        plan.addDevelopmentEvent(new DevelopmentActivity(university, new Schedule(universityStartDay, universityEndDay, ActivityCondition.ON_WEEKDAYS) ));
+        plan.addDevelopmentEvent(new DevelopmentActivity(internship,new Schedule(internshipStartDay, internsipEndDay, ActivityCondition.ON_WEEKDAYS) ));
+        plan.addDevelopmentEvent(new DevelopmentActivity(meetUp, new Schedule(meetupStartDay, meetupEndDay, ActivityCondition.MONTHLY) ));
+        plan.addDevelopmentEvent(new DevelopmentActivity(selfStudy, new Schedule(selfstudyStartDay, seldstudyEndDay, ActivityCondition.ONCE) ));
 
         LocalDate date1 = LocalDate.of(2018, 5, 14);
         LocalDate date2 = LocalDate.of(2018, 7, 1);
         LocalDate date3 = LocalDate.now();
 
         System.out.println(plan.getName() + ":");
-        plan.implementPlan(date1);
+        plan.implementPlan(date3);
 
     }
 }
