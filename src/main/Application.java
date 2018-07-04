@@ -11,6 +11,9 @@ import person.consciousness.development.DevelopmentPlan;
 import person.consciousness.conditions.ActivityCondition;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
@@ -108,18 +111,20 @@ public class Application {
         LocalDate selfstudyStartDay = LocalDate.of(2010, 1, 1);
         LocalDate seldstudyEndDay = LocalDate.of(2021, 6, 20);
 
-
         plan.addDevelopmentEvent(new DevelopmentActivity(university, new Schedule(universityStartDay, universityEndDay, ActivityCondition.ON_WEEKDAYS) ));
         plan.addDevelopmentEvent(new DevelopmentActivity(internship,new Schedule(internshipStartDay, internsipEndDay, ActivityCondition.ON_WEEKDAYS) ));
         plan.addDevelopmentEvent(new DevelopmentActivity(meetUp, new Schedule(meetupStartDay, meetupEndDay, ActivityCondition.MONTHLY) ));
         plan.addDevelopmentEvent(new DevelopmentActivity(selfStudy, new Schedule(selfstudyStartDay, seldstudyEndDay, ActivityCondition.ONCE) ));
 
         LocalDate date1 = LocalDate.of(2018, 5, 14);
-        LocalDate date2 = LocalDate.of(2018, 7, 1);
+        LocalDate date2 = LocalDate.of(2018, 5, 15);
         LocalDate date3 = LocalDate.now();
 
-        System.out.println(plan.getName() + ":");
-        plan.implementPlan(date3);
+        plan.addDateToCalendar(date1);
+        plan.addDateToCalendar(date2);
 
+        System.out.println(plan.getName() + ":");
+
+        plan.implementPlan();
     }
 }
