@@ -72,33 +72,30 @@ public class Application {
         );
 
         //Creating activities
-        University university = new University("CH.U.I.", 30, 10);
+        University university = new University("CH.N.U.", 3, 1);
         university.addStudent(student1);
         university.addStudent(student2);
         university.addStudent(student3);
         university.addStudent(student4);
-        university.addStudent(student5);
-        university.addStudent(student6);
+
 
         Internship internship = new Internship(
                 "Interlink",
-                100,
-                100
+                10,
+                10
         );
 
         for(Student st: university.getListOfStudents()){
             internship.addStudent(st);
         }
 
-        MeetUp meetUp = new MeetUp("OOP Basics", 70, 70, true);
+        MeetUp meetUp = new MeetUp("MeetUp: OOP Basics", 7, 7, true);
         meetUp.addStudent(student1);
         meetUp.addStudent(student2);
         meetUp.addStudent(student3);
         meetUp.addStudent(student4);
-        meetUp.addStudent(student5);
-        meetUp.addStudent(student6);
 
-        SelfStudy selfStudy = new SelfStudy(65, 50);
+        SelfStudy selfStudy = new SelfStudy(5, 5);
 
         //Creating dates
         LocalDate universityStartDay = LocalDate.of(2016, 1, 1);

@@ -10,12 +10,12 @@ import java.util.TreeSet;
 public class DevelopmentPlan {
     private Set<Student> listOfStudents;
     private Set<LocalDate> calendar;
-    private ArrayList<DevelopmentActivity> events;
+    private ArrayList<DevelopmentActivity> activities;
     private String name;
 
     public DevelopmentPlan(String name) {
         listOfStudents = new HashSet<>();
-        events = new ArrayList<>();
+        activities = new ArrayList<>();
         calendar = new TreeSet<>();
         this.name = name;
     }
@@ -33,14 +33,14 @@ public class DevelopmentPlan {
     }
 
     public void addDevelopmentActivity(DevelopmentActivity event) {
-        this.events.add(event);
+        this.activities.add(event);
     }
 
     public void implementPlan() {
         System.out.println(name + ": ");
         for(LocalDate date: calendar){
             System.out.println("\n- " + date);
-            for (DevelopmentActivity event : events) {
+            for (DevelopmentActivity event : activities) {
                 System.out.println("\n" + event.getSource().getName());
                 for (Student st : listOfStudents) {
                     event.startEvent(st, date);

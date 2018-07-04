@@ -24,12 +24,7 @@ public class ComplexCondition implements ICompositeCondition{
 
     @Override
     public boolean contains(ICompositeCondition condition){
-        if(conditions.equals(condition)){
-            return true;
-        }
-        else {
-            return conditions.stream().anyMatch(conditionT -> conditionT.contains(condition));
-        }
+        return conditions.stream().anyMatch(conditionT -> conditionT.contains(condition));
     }
 
     @Override

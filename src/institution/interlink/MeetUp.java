@@ -3,8 +3,6 @@ package institution.interlink;
 import institution.Institution;
 import person.Student;
 import person.consciousness.Knowledge;
-import java.util.ArrayList;
-import institution.KnowledgeSource;
 
 public class MeetUp extends Institution {
     private boolean isInteractive;
@@ -21,11 +19,11 @@ public class MeetUp extends Institution {
     public void teach(Student student) {
         if (this.getListOfStudents().contains(student)) {
             if(isInteractive)
-                student.study(getTheoreticalKnowledge() * 1.5, 0);
+                setTheoreticalKnowledge(new Knowledge(getTheoreticalKnowledge() * 1.5));
+            if(student.HasLaptop())
+                student.study(getTheoreticalKnowledge(), getPracticalKnowledge());
             else
                 student.study(getTheoreticalKnowledge(), 0);
-            if(student.HasLaptop())
-                student.study(0, getPracticalKnowledge());
         }
     }
 }
