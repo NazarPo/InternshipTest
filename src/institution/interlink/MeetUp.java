@@ -7,17 +7,25 @@ import java.util.ArrayList;
 import institution.KnowledgeSource;
 
 public class MeetUp extends Institution {
-    public MeetUp(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge){
-        super(name, levelOfTheoreticalKnowledge,levelOfPracticalKnowledge);
+    private boolean isInteractive;
+
+    public MeetUp(String name, double levelOfTheoreticalKnowledge, double levelOfPracticalKnowledge, boolean isInteractive) {
+        super(name, levelOfTheoreticalKnowledge, levelOfPracticalKnowledge);
+        this.isInteractive = isInteractive;
     }
 
-    public void teach(Student student){
-        if(this.getListOfStudents().contains(student)) {
-            if(student.HasLaptop()){
-                student.study(this.getTheoreticalKnowledge(), this.getPracticalKnowledge());
-            } else {
-                student.study(this.getTheoreticalKnowledge(), 0);
-            }
+    public boolean IsInteractive() {
+        return isInteractive;
+    }
+
+    public void teach(Student student) {
+        if (this.getListOfStudents().contains(student)) {
+            if(isInteractive)
+                student.study(getTheoreticalKnowledge() * 1.5, 0);
+            else
+                student.study(getTheoreticalKnowledge(), 0);
+            if(student.HasLaptop())
+                student.study(0, getPracticalKnowledge());
         }
     }
 }

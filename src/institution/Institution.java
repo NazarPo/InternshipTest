@@ -17,6 +17,8 @@ public class Institution implements KnowledgeSource {
         setPracticalKnowledge(new Knowledge(levelOfPracticalKnowledge));
     }
 
+    public Institution(){};
+
     public double getTheoreticalKnowledge(){
         return theoreticalKnowledge.getLevel();
     }

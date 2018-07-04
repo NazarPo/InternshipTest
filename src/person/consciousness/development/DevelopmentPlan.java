@@ -8,13 +8,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class DevelopmentPlan {
-    private ArrayList<Student> listOfStudents;
+    private Set<Student> listOfStudents;
     private Set<LocalDate> calendar;
     private ArrayList<DevelopmentActivity> events;
     private String name;
 
     public DevelopmentPlan(String name) {
-        listOfStudents = new ArrayList<>();
+        listOfStudents = new HashSet<>();
         events = new ArrayList<>();
         calendar = new TreeSet<>();
         this.name = name;
@@ -32,11 +32,12 @@ public class DevelopmentPlan {
         this.listOfStudents.add(student);
     }
 
-    public void addDevelopmentEvent(DevelopmentActivity event) {
+    public void addDevelopmentActivity(DevelopmentActivity event) {
         this.events.add(event);
     }
 
     public void implementPlan() {
+        System.out.println(name + ": ");
         for(LocalDate date: calendar){
             System.out.println("\n- " + date);
             for (DevelopmentActivity event : events) {

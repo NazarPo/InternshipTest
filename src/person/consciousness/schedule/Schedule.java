@@ -1,7 +1,9 @@
 package person.consciousness.schedule;
 
 import person.Student;
-import person.consciousness.conditions.ActivityCondition;
+import person.consciousness.condition_repo.ICompositeCondition;
+import person.consciousness.conditions.ComplexCondition;
+import person.consciousness.conditions.PeriodCondition;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -10,10 +12,10 @@ import java.util.Map;
 public class Schedule {
     private LocalDate startDate;
     private LocalDate endDate;
-    private ActivityCondition condition;
+    private ICompositeCondition condition;
     private Map<Student, LocalDate> visitedEvents;
 
-    public Schedule(LocalDate startDate, LocalDate endDate, ActivityCondition condition){
+    public Schedule(LocalDate startDate, LocalDate endDate, ICompositeCondition condition){
         this.startDate = startDate;
         this.endDate = endDate;
         this.condition = condition;
@@ -24,31 +26,35 @@ public class Schedule {
         if (date.isBefore(startDate) || date.isAfter(endDate))
             return false;
         else {
-            if (condition.equals(ActivityCondition.MONTHLY)) {
-                if (isNewMonth(visitedEvents.get(student), date) && condition.conditionDate(date)) {
+            if (condition.conditionDate(date)) {
+                if (condition.contains(PeriodCondition.ONCE_A_MONTH)) {
+                    if (isNewMonth(visitedEvents.get(student), date) && condition.conditionDate(date)) {
+                        visitedEvents.put(student, date);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                if (condition.contains(PeriodCondition.ONCE_A_WEEK)) {
+                    if (isNewWeek(visitedEvents.get(student), date) && condition.conditionDate(date)) {
+                        visitedEvents.put(student, date);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                if (condition.conditionDate(date)) {
                     visitedEvents.put(student, date);
                     return true;
                 } else {
                     return false;
                 }
             }
-
-            if (condition.equals(ActivityCondition.WEEKLY)) {
-                if (isNewWeek(visitedEvents.get(student), date) && condition.conditionDate(date)) {
-                    visitedEvents.put(student, date);
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if(condition.conditionDate(date)){
-                visitedEvents.put(student, date);
-                return true;
-            } else {
+            else {
                 return false;
             }
-
         }
     }
 

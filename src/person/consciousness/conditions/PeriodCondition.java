@@ -5,44 +5,44 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 
-public enum ActivityCondition implements ICompositeCondition {
-    ON_WEEKDAYS, ONCE, MONTHLY, WEEKLY, IN_SUMMER;
+public enum PeriodCondition implements ICompositeCondition {
+    ON_WEEKDAYS, ALWAYS, ONCE_A_MONTH, ONCE_A_WEEK, NOT_IN_SUMMER;
 
     @Override
-    public void add(){}
+    public void add(ICompositeCondition condition){}
 
     @Override
-    public void remove(){}
+    public void remove(ICompositeCondition condition){}
 
     @Override
-    public boolean contains(ActivityCondition condition){
+    public boolean contains(ICompositeCondition condition){
         return condition.equals(this);
     }
 
     @Override
     public boolean conditionDate(LocalDate date) {
         switch (this) {
-            case ONCE:
+            case ALWAYS:
                 return true;
-            case MONTHLY:
+            case ONCE_A_MONTH:
                 return true;
-            case WEEKLY:
+            case ONCE_A_WEEK:
                 return true;
             case ON_WEEKDAYS:
-                return isWeekDay(date);
-            case IN_SUMMER:
+                return isWeekday(date);
+            case NOT_IN_SUMMER:
                 return isSummer(date);
             default:
                 return false;
         }
     }
 
-    public static boolean isWeekDay(LocalDate date)
+    public static boolean isWeekday(LocalDate date)
     {
         return !(date.getDayOfWeek() == DayOfWeek.SUNDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY);
     }
 
     public static boolean isSummer(LocalDate date){
-        return date.getMonth() == Month.JUNE || date.getMonth() == Month.JULY || date.getMonth() == Month.AUGUST;
+        return !(date.getMonth() == Month.JUNE || date.getMonth() == Month.JULY || date.getMonth() == Month.AUGUST);
     }
 }

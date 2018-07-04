@@ -68,13 +68,13 @@ public class Student implements KnowledgeSource
             learningFactor = factor;
     }
 
-    public void addTheoreticalKnowledge(double knowledge){
+    private void addTheoreticalKnowledge(double knowledge){
         double currentKnowledge = this.getTheoreticalKnowledge();
         this.theoreticalKnowledge.setLevel(currentKnowledge + knowledge * this.getLearningFactor());
         System.out.println(this.studentName + " : " + "theoretical knowledge " + currentKnowledge + " ---> " + this.theoreticalKnowledge.getLevel());
     }
 
-    public void addPracticalKnowledge(double knowledge){
+    private void addPracticalKnowledge(double knowledge){
         double currentKnowledge = this.getPracticalKnowledge();
         this.practicalKnowledge.setLevel(currentKnowledge + knowledge * this.getLearningFactor());
         System.out.println(this.studentName + " : " + "practical knowledge " + currentKnowledge + " ---> " + this.practicalKnowledge.getLevel());
